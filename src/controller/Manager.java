@@ -22,26 +22,31 @@ public class Manager {
 	
 	public static void main(String[] args) {
 		 
+		//show the view
 		MainView l = new MainView();
 		l.setVisible(true);
 	
+		//this will be the model that allow the data to be shown properly on the table
 		MeansTableModel tableModel= new MeansTableModel();
 		
+		//the data
 		ArrayList<Mean> means=new ArrayList<Mean>();
 		means.add(new Mean(0,50,false,"Car",false)); // I could create a dedicated class for car,  but there is no reason
 		means.add(new Truck(0,30,true,true));
 		means.add(new Airplane(0,200,true,true));
 		
+		//att the data to the model of the table so it can be shown
         means.forEach((m)->tableModel.addMeanRow(m));
         l.setTableModel(tableModel);
 
         
-        
+        //action of the button print
 		l.getBtnPrint().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Mean selectedValue = means.get(l.getTable().getSelectedRow());
 				if(selectedValue.isPrintable())
 				{
+					//I decided to show a box with some data
 					JPanel panel = new JPanel();
 					panel.setPreferredSize(new Dimension(60,30));
 					panel.add(new JLabel(selectedValue.getName()+" has travelled "+
@@ -49,7 +54,7 @@ public class Manager {
 							selectedValue.getSpeed()+" seconds"));
 					JOptionPane.showOptionDialog(panel, panel, "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 					
-					//demostration of use of a method of an object
+					//demostration of use of a method of an object by cast back
 					if(selectedValue.getName()=="Truck") {
 						((Truck)selectedValue).load();
 					}
@@ -57,7 +62,9 @@ public class Manager {
 			}
 		});
 		
-		
+		//I used a single action and added to two buttonlistener(below)
+		//but i could also use two action installed on the proper buttonlistener, 
+		//splitting the actionperformed and removing getSource()).equals(
 		ActionListener startstop=new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Mean selectedValue = means.get(l.getTable().getSelectedRow());
@@ -135,16 +142,15 @@ public class Manager {
 		
 		
 		
-        
+        //forever
         while (true) {
             try {
-                Thread.sleep(1000);
-                
-                //check buttons
+                Thread.sleep(1000);//wait a second
                 
                 means.forEach((m)->{
                 	if(m.isStarted())
                 	{
+                		//update values
                 		m.setMeters(m.getMeters()+m.getSpeed());
     					tableModel.setValueAt(m.getMeters(), means.indexOf(m), 0);
 

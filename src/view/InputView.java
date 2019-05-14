@@ -21,10 +21,10 @@ public class InputView extends JFrame {
 	private JCheckBox checkBoxPrintable;
 	
 	/**
-	 * Create the frame.
+	 * Generated using eclipse windowsbuilder,
 	 */
 	public InputView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 199, 222);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,6 +98,8 @@ public class InputView extends JFrame {
 		return btnSend;
 	}
 	
+	
+	//kill the window after pressed the button send
 	public void windowClosing()
     {
       dispose();

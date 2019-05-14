@@ -1,5 +1,6 @@
 package model;
 
+//ths class might be transformed to an interface (but the car class has to be made) - the result is the same
 public class Mean {
 	
 	private int meters=0;

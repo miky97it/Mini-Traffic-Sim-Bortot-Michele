@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class MeansTableModel extends DefaultTableModel
 {
+	//the data has to be a vector
 	public void addMeanRow(Mean mean) {
 		Vector vector= new Vector(4);
 		vector.add(mean.getMeters());
@@ -15,8 +16,9 @@ public class MeansTableModel extends DefaultTableModel
 		this.addRow(vector);
 	}
 	
+	//set the header
 	public MeansTableModel(){
-
+		
 		setColumnIdentifiers(new String[]{"Meters Moved","Speed","Means Type","Started"});
 	}
 
@@ -25,6 +27,7 @@ public class MeansTableModel extends DefaultTableModel
       return false;
     }
 	
+	//to show the checkbox on the bolean column
 	 @Override
      public Class<?> getColumnClass(int columnIndex) {
          return getValueAt(0,columnIndex).getClass();
